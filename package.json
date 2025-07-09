@@ -1,0 +1,21 @@
+{
+  "name": "jsagents",
+  "version": "1.0.0",
+  "description": "fullstack agents AI project with node and react, with typescript.",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jhonneg/jsAgents.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jhonneg/jsAgents/issues"
+  },
+  "homepage": "https://github.com/Jhonneg/jsAgents#readme"
+}
