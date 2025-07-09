@@ -8,6 +8,20 @@
       "when": 1752040250171,
       "tag": "0000_lean_zaladane",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1752101209519,
+      "tag": "0001_puzzling_overlord",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752101257522,
+      "tag": "0002_red_shaman",
+      "breakpoints": true
     }
   ]
 }
