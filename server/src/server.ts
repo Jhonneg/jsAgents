@@ -1,4 +1,5 @@
 import { fastifyCors } from '@fastify/cors';
+import { sql } from './db/connection.ts';
 import { fastify } from 'fastify';
 import {
   serializerCompiler,
