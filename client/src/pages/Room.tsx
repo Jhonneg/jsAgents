@@ -8,7 +8,7 @@ type RoomParams = {
   roomId: string;
 };
 
-export function Room() {
+export default function Room() {
   const params = useParams<RoomParams>();
 
   if (!params.roomId) {
