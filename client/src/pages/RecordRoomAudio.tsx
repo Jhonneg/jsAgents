@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/suspicious/noConsole: <asdsdasadasd> */
 
 import { useRef, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const isRecordingSupported =
@@ -8,7 +9,17 @@ const isRecordingSupported =
   typeof navigator.mediaDevices.getUserMedia === 'function' &&
   typeof window.MediaRecorder === 'function';
 
+type RoomParams = {
+  roomId: string;
+};
+
 export default function RecordRoomAudio() {
+  const params = useParams<RoomParams>();
+
+  if (!params.roomId) {
+    return <Navigate replace to="/" />;
+  }
+
   const [isRecording, setIsRecording] = useState(false);
   const recorder = useRef<MediaRecorder | null>(null);
 
@@ -18,6 +29,21 @@ export default function RecordRoomAudio() {
     if (recorder.current && recorder.current.state !== 'inactive') {
       recorder.current.stop();
     }
+  }
+
+  async function uploadAudio(audio: Blob) {
+    const formData = new FormData();
+    formData.append('file', audio, 'audio.webm');
+    const response = await fetch(
+      `http://localhost:3333/rooms/${params.roomId}/audio`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
   }
 
   async function startRecording() {
@@ -36,25 +62,25 @@ export default function RecordRoomAudio() {
       },
     });
 
-    const recorder = new MediaRecorder(audio, {
+    recorder.current = new MediaRecorder(audio, {
       mimeType: 'audio/webm',
       audioBitsPerSecond: 64_000,
     });
 
-    recorder.ondataavailable = (event) => {
+    recorder.current.ondataavailable = (event) => {
       if (event.data.size > 0) {
-        console.log(event.data);
+        uploadAudio(event.data);
       }
     };
 
-    recorder.onstart = () => {
+    recorder.current.onstart = () => {
       console.log('Gravação iniciada');
     };
 
-    recorder.onstop = () => {
+    recorder.current.onstop = () => {
       console.log('Gravação encerrada/pausada');
     };
-    recorder.start();
+    recorder.current.start();
   }
 
   return (
