@@ -22,6 +22,13 @@
       "when": 1752101257522,
       "tag": "0002_red_shaman",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752376708964,
+      "tag": "0003_dizzy_dragon_lord",
+      "breakpoints": true
     }
   ]
 }

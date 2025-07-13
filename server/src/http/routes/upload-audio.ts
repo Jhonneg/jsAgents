@@ -13,6 +13,13 @@ export const uploadAudioRoute: FastifyPluginCallbackZod = (app) => {
     },
     async (request, reply) => {
       const { roomId } = request.params;
+      const audio = await request.file();
+
+      if (!audio) {
+        throw new Error('Audio is required');
+      }
+
+      
     }
   );
 };
